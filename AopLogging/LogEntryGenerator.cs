@@ -5,13 +5,6 @@ namespace AopLogging
 {
     public class LogEntryGenerator : ILogEntryGenerator
     {
-        private readonly IArgsGenerator _argsGenerator;
-
-        public LogEntryGenerator(IArgsGenerator argsGenerator)
-        {
-            _argsGenerator = argsGenerator;
-        }
-
         public LogEntry CreateInvocationLogEntry(string className, string methodName, object[] args)
         {
             return new LogEntry
@@ -22,7 +15,7 @@ namespace AopLogging
                 {
                     {"FullName", className},
                     {"Method", methodName},
-                    {"Args", _argsGenerator.ToFlatString(args)}
+                    {"Args", args.ToFlatString()}
                 }
             };
         }
@@ -38,7 +31,7 @@ namespace AopLogging
                 {
                     {"FullName", className},
                     {"Method", methodName},
-                    {"Args", _argsGenerator.ToFlatString(args)},
+                    {"Args", args.ToFlatString()},
                     {"Return type", returnType.ToString()},
                     {"Return value", returnValue?.ToString()}
                 }
@@ -55,7 +48,7 @@ namespace AopLogging
                 {
                     {"FullName", className},
                     {"Method", methodName},
-                    {"Args", _argsGenerator.ToFlatString(args)},
+                    {"Args", args.ToFlatString()},
                     {"Exception", innerException.ToString()}
                 }
             };

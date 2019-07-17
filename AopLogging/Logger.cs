@@ -6,7 +6,7 @@ namespace AopLogging
     {
         public void Log(LogEntry logEntry)
         {
-            Console.WriteLine($@"{logEntry?.LogLevel}|{logEntry?.LogType}|{logEntry?.Payload?.FlattenDictionary()}");
+            Console.WriteLine($@"{logEntry?.LogLevel}|{logEntry?.LogType}|{logEntry?.Payload?.ToFlatString()}");
         }
     }
 }
