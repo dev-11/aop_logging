@@ -5,6 +5,6 @@ namespace AopLogging
         Undefined,
         Invoke,
         Leave,
-        Excpetion
+        Exception
     }
 }

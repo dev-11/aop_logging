@@ -4,14 +4,10 @@ namespace AopLogging
 {
     public class DummyObject : IDummyObject
     {
-        public void Hw()
+        public bool Hw(string text)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine(text);
+            return true;
         }
-    }
-
-    public interface IDummyObject
-    {
-        void Hw();
     }
 }

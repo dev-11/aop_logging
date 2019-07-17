@@ -8,8 +8,10 @@ namespace AopLoggingConsole
         {
             var logDummy = LoggingFactory.DummyObjectWithLogging;
 
-            logDummy.Hw();
+            logDummy.Hw("hello world!");
 
+            var l = LoggingFactory.LoggerWithLogging;
+            l.Log(null);
         }
     }
 }

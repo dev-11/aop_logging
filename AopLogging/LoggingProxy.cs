@@ -8,6 +8,7 @@ namespace AopLogging
     {
         private T _decorated;
         private ILogger _logger;
+        private IArgsGenerator _argsGenerator;
 
         protected override object Invoke(MethodInfo targetMethod, object[] args)
         {
@@ -17,11 +18,11 @@ namespace AopLogging
                 {
                     LogLevel = LogLevel.Information,
                     LogType = LogType.Invoke,
-                    Payload = new Dictionary<string, string>()
+                    Payload = new Dictionary<string, string>
                     {
                         {"FullName", _decorated.GetType().FullName},
                         {"Method", targetMethod.Name},
-                        {"Args", string.Join(',', args)}
+                        {"Args", string.Join(", ", args)}
                     }
                 });
 
@@ -31,11 +32,13 @@ namespace AopLogging
                 {
                     LogLevel = LogLevel.Information,
                     LogType = LogType.Leave,
-                    Payload = new Dictionary<string, string>()
+                    Payload = new Dictionary<string, string>
                     {
                         {"FullName", _decorated.GetType().FullName},
                         {"Method", targetMethod.Name},
-                        {"Args", string.Join(',', args)}
+                        {"Args", _argsGenerator.ToFlatString(args)},
+                        {"Return type", targetMethod.ReturnType.ToString()},
+                        {"Return value", result?.ToString()}
                     }
                 });
                 
@@ -43,20 +46,34 @@ namespace AopLogging
             }
             catch (Exception ex) when (ex is TargetInvocationException)
             {
-                LogException(ex.InnerException ?? ex, targetMethod);
-                throw ex.InnerException ?? ex;
+                var innerException = ex.InnerException ?? ex; 
+                
+                _logger.Log(new LogObject
+                {
+                    LogLevel = LogLevel.Error,
+                    LogType = LogType.Exception,
+                    Payload = new Dictionary<string, string>
+                    {
+                        {"FullName", _decorated.GetType().FullName},
+                        {"Method", targetMethod.Name},
+                        {"Args", _argsGenerator.ToFlatString(args)},
+                        {"Exception", innerException.ToString()}
+                    }
+                });
+                
+                throw innerException;
             }
         }
 
-        public static T Create(T decorated, ILogger logger)
+        public static T Create(T decorated, ILogger logger, IArgsGenerator argsGenerator)
         {
             object proxy = Create<T, LoggingProxy<T>>();
-            ((LoggingProxy<T>)proxy).SetParameters(decorated, logger);
+            ((LoggingProxy<T>)proxy).SetParameters(decorated, logger, argsGenerator);
 
             return (T)proxy;
         }
 
-        private void SetParameters(T decorated, ILogger logger)
+        private void SetParameters(T decorated, ILogger logger, IArgsGenerator argsGenerator)
         {
             if (decorated == null)
             {
@@ -66,11 +83,7 @@ namespace AopLogging
             _decorated = decorated;
 
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-        }
-
-        private void LogException(Exception exception, MemberInfo methodInfo = null)
-        {
-            Console.WriteLine($"Class {_decorated.GetType().FullName}, Method {methodInfo.Name} threw exception:\n{exception}");
+            _argsGenerator = argsGenerator ?? throw new ArgumentNullException(nameof(argsGenerator));
         }
     }
 }

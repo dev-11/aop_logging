@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 
 namespace AopLogging
 {
@@ -7,9 +6,7 @@ namespace AopLogging
     {
         public void Log(LogObject logObject)
         {
-            var v = logObject.Payload.Select(kvp => kvp.Key + ": " + kvp.Value.ToString()).ToArray();
-            
-            Console.WriteLine($@"{logObject.LogLevel} {logObject.LogType} {string.Join(',', v)}");
+            Console.WriteLine($@"{logObject?.LogLevel}|{logObject?.LogType}|{logObject?.Payload?.FlattenDictionary()}");
         }
     }
 }
