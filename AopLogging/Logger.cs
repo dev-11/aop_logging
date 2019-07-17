@@ -4,9 +4,9 @@ namespace AopLogging
 {
     public class Logger : ILogger
     {
-        public void Log(LogObject logObject)
+        public void Log(LogEntry logEntry)
         {
-            Console.WriteLine($@"{logObject?.LogLevel}|{logObject?.LogType}|{logObject?.Payload?.FlattenDictionary()}");
+            Console.WriteLine($@"{logEntry?.LogLevel}|{logEntry?.LogType}|{logEntry?.Payload?.FlattenDictionary()}");
         }
     }
 }

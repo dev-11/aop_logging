@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace AopLogging
 {
-    public class LogObject
+    public class LogEntry
     {
         public LogLevel LogLevel { get; set; }
         public LogType LogType { get; set; }

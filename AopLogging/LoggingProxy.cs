@@ -14,7 +14,7 @@ namespace AopLogging
         {
             try
             {
-                _logger.Log(new LogObject
+                _logger.Log(new LogEntry
                 {
                     LogLevel = LogLevel.Information,
                     LogType = LogType.Invoke,
@@ -28,7 +28,7 @@ namespace AopLogging
 
                 var result = targetMethod.Invoke(_decorated, args);
 
-                _logger.Log(new LogObject
+                _logger.Log(new LogEntry
                 {
                     LogLevel = LogLevel.Information,
                     LogType = LogType.Leave,
@@ -48,7 +48,7 @@ namespace AopLogging
             {
                 var innerException = ex.InnerException ?? ex; 
                 
-                _logger.Log(new LogObject
+                _logger.Log(new LogEntry
                 {
                     LogLevel = LogLevel.Error,
                     LogType = LogType.Exception,
