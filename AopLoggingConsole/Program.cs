@@ -1,4 +1,5 @@
-﻿using AopLogging;
+﻿using System;
+using AopLogging;
 
 namespace AopLoggingConsole
 {
@@ -6,12 +7,10 @@ namespace AopLoggingConsole
     {
         static void Main(string[] args)
         {
-            var logDummy = ObjectFactory.DummyObjectWithLogging;
+            var calculator = ObjectFactory.CalculatorWithLogging;
 
-            logDummy.Hw("hello world!");
-
-            var l = ObjectFactory.LoggerWithLogging;
-            l.Log(null);
+            Console.WriteLine(calculator.Add(calculator.Divide(1,2), calculator.Multiply(4,calculator.Subtract(9,2))));
+            
         }
     }
 }

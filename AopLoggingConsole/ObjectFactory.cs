@@ -4,6 +4,6 @@ namespace AopLoggingConsole
 {
     public class ObjectFactory : LoggingFactory
     {
-        public static IDummyObject DummyObjectWithLogging => LoggingProxy<IDummyObject>.Create(new DummyObject(), new Logger(), new LogEntryGenerator());
+        public static ICalculator CalculatorWithLogging => LoggingProxy<ICalculator>.Create(new Calculator(), new Logger(), new LogEntryGenerator());
     }
 }
