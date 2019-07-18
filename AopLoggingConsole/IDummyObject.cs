@@ -1,4 +1,4 @@
-namespace AopLogging
+namespace AopLoggingConsole
 {
     public interface IDummyObject
     {

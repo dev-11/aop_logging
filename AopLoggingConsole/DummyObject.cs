@@ -1,6 +1,7 @@
 using System;
+using AopLogging;
 
-namespace AopLogging
+namespace AopLoggingConsole
 {
     public class DummyObject : IDummyObject
     {
