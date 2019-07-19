@@ -23,7 +23,7 @@ var calc = LoggingProxy<ICalculator>.Create(new Calculator(),
                                             new LogEntryGenerator());
 
 calc.Add(1, 2);
-cacl.Divide(1, 0);
+cacl.Divide(12, 0);
 ```
 
 If we decorate `T` with the `LoggingProxy` the logging will be totally automatic.
