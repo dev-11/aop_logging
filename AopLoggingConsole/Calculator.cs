@@ -1,6 +1,3 @@
-using System;
-using AopLogging;
-
 namespace AopLoggingConsole
 {
     public class Calculator : ICalculator

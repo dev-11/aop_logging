@@ -1,5 +1,4 @@
 ﻿using System;
-using AopLogging;
 
 namespace AopLoggingConsole
 {
@@ -9,8 +8,14 @@ namespace AopLoggingConsole
         {
             var calculator = ObjectFactory.CalculatorWithLogging;
 
-            Console.WriteLine(calculator.Add(calculator.Divide(1,2), calculator.Multiply(4,calculator.Subtract(9,2))));
-            
+            // logging method invoke 
+            calculator.Add(1,2);
+            calculator.Divide(10, 2);
+            calculator.Subtract(1,2);
+            calculator.Multiply(12,2);
+
+            // logging DivideByZeroException
+            calculator.Divide(12,0);
         }
     }
 }
