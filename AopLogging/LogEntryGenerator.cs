@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using PayloadKeys = AopLogging.Constants.PayloadKeys;
 
 namespace AopLogging
 {
@@ -13,9 +14,9 @@ namespace AopLogging
                 LogType = LogType.Invoke,
                 Payload = new Dictionary<string, string>
                 {
-                    {"FullName", className},
-                    {"Method", methodName},
-                    {"Args", args.ToFlatString()}
+                    { PayloadKeys.FullNameKey, className },
+                    { PayloadKeys.MethodKey, methodName },
+                    { PayloadKeys.ArgsKey, args.ToFlatString() }
                 }
             };
         }
@@ -29,11 +30,11 @@ namespace AopLogging
                 LogType = LogType.Leave,
                 Payload = new Dictionary<string, string>
                 {
-                    {"FullName", className},
-                    {"Method", methodName},
-                    {"Args", args.ToFlatString()},
-                    {"Return type", returnType.ToString()},
-                    {"Return value", returnValue?.ToString()}
+                    { PayloadKeys.FullNameKey, className },
+                    { PayloadKeys.MethodKey, methodName },
+                    { PayloadKeys.ArgsKey, args.ToFlatString() },
+                    { PayloadKeys.ReturnTypeKey, returnType.ToString() },
+                    { PayloadKeys.ReturnValueKey, returnValue?.ToString() }
                 }
             };
         }
@@ -46,10 +47,10 @@ namespace AopLogging
                 LogType = LogType.Exception,
                 Payload = new Dictionary<string, string>
                 {
-                    {"FullName", className},
-                    {"Method", methodName},
-                    {"Args", args.ToFlatString()},
-                    {"Exception", innerException.ToString()}
+                    { PayloadKeys.FullNameKey, className },
+                    { PayloadKeys.MethodKey, methodName },
+                    { PayloadKeys.ArgsKey, args.ToFlatString() },
+                    { PayloadKeys.ExceptionKey, innerException.ToString() }
                 }
             };
         }
