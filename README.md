@@ -23,6 +23,7 @@ var calc = LoggingProxy<ICalculator>.Create(new Calculator(),
                                             new LogEntryGenerator());
 
 calc.Add(1, 2);
+cacl.Divide(1, 0);
 ```
 
 If we decorate `T` with the `LoggingProxy` the logging will be totally automatic.
@@ -32,4 +33,14 @@ Sample output of `ConsoleLogger`
 ```
 07/19/2019 19:32:35|Information|Invoke|ClassName: AopLoggingConsole.Calculator, Method: Add, Args: 1, 2
 07/19/2019 19:32:35|Information|Leave|ClassName: AopLoggingConsole.Calculator, Method: Add, Args: 1, 2, Return type: System.Int32, Return value: 3
+07/19/2019 19:32:36|Error|Exception|ClassName: AopLoggingConsole.Calculator, Method: Divide, Args: 12, 0, Exception: System.DivideByZeroException: Attempted to divide by zero.
+   at AopLoggingConsole.Calculator.Divide(Int32 a, Int32 b) in /Users/otto/Source/GitHub/aop_logging/AopLoggingConsole/Calculator.cs:line 12
+
+Unhandled Exception: System.DivideByZeroException: Attempted to divide by zero.
+   at AopLogging.LoggingProxy`1.Invoke(MethodInfo targetMethod, Object[] args) in /Users/ottogal/Work/SideProjects/GitHub/aop_logging/AopLogging/LoggingProxy.cs:line 34
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Reflection.DispatchProxyGenerator.Invoke(Object[] args)
+   at generatedProxy_1.Divide(Int32 , Int32 )
+   at AopLoggingConsole.Program.Main(String[] args) in /Users/otto/Source/GitHub/aop_logging/AopLoggingConsole/Program.cs:line 18
+
 ```
