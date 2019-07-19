@@ -30,6 +30,6 @@ If we decorate `T` with the `LoggingProxy` the logging will be totally automatic
 Sample output of `ConsoleLogger`
 
 ```
-07/19/2019 19:32:35|Information|Invoke|FullName: AopLoggingConsole.Calculator, Method: Add, Args: 1, 2
-07/19/2019 19:32:35|Information|Leave|FullName: AopLoggingConsole.Calculator, Method: Add, Args: 1, 2, Return type: System.Int32, Return value: 3
+07/19/2019 19:32:35|Information|Invoke|ClassName: AopLoggingConsole.Calculator, Method: Add, Args: 1, 2
+07/19/2019 19:32:35|Information|Leave|ClassName: AopLoggingConsole.Calculator, Method: Add, Args: 1, 2, Return type: System.Int32, Return value: 3
 ```
