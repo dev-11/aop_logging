@@ -7,7 +7,7 @@ namespace AopLogging
 
         public static class PayloadKeys
         {
-            public const string FullNameKey = "FullName";
+            public const string ClassNameKey = "ClassName";
             public const string MethodKey = "Method";
             public const string ArgsKey = "Args";
             public const string ReturnTypeKey = "Return type";

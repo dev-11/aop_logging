@@ -14,7 +14,7 @@ namespace AopLogging
                 LogType = LogType.Invoke,
                 Payload = new Dictionary<string, string>
                 {
-                    { PayloadKeys.FullNameKey, className },
+                    { PayloadKeys.ClassNameKey, className },
                     { PayloadKeys.MethodKey, methodName },
                     { PayloadKeys.ArgsKey, args.ToFlatString() }
                 }
@@ -30,7 +30,7 @@ namespace AopLogging
                 LogType = LogType.Leave,
                 Payload = new Dictionary<string, string>
                 {
-                    { PayloadKeys.FullNameKey, className },
+                    { PayloadKeys.ClassNameKey, className },
                     { PayloadKeys.MethodKey, methodName },
                     { PayloadKeys.ArgsKey, args.ToFlatString() },
                     { PayloadKeys.ReturnTypeKey, returnType.ToString() },
@@ -47,7 +47,7 @@ namespace AopLogging
                 LogType = LogType.Exception,
                 Payload = new Dictionary<string, string>
                 {
-                    { PayloadKeys.FullNameKey, className },
+                    { PayloadKeys.ClassNameKey, className },
                     { PayloadKeys.MethodKey, methodName },
                     { PayloadKeys.ArgsKey, args.ToFlatString() },
                     { PayloadKeys.ExceptionKey, innerException.ToString() }
