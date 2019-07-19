@@ -9,7 +9,8 @@ The logging is implemented in `AopLogging.LogginProxy` class. To complete the lo
 Example Usage
 
 ```csharp
-                                            // the Calculator has to implement an interface
+                                            // the class we want to log
+                                            // it has to implement an interface
 var calc = LoggingProxy<ICalculator>.Create(new Calculator(),
                                             // your implementation of AopLogging.ILogger
                                             new ConsoleLogger(),
