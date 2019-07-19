@@ -3,7 +3,7 @@
 Simple aspect oriented logger
 
 
-The logging is implemented in `LogginProxy` class. To complete the logging an implementation of the `ILogger` and `ILogEntryGenerator` have to be passed in next to the `T` what we want to decorate with the loggin.
+The logging is implemented in `AopLogging.LogginProxy` class. To complete the logging an implementation of the `AopLogging.ILogger` and `AopLogging.ILogEntryGenerator` have to be passed in next to the `T` what we want to decorate with the loggin.
 
 
 Example Usage
