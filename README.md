@@ -9,8 +9,22 @@ The logging is implemented in `LogginProxy` class. To complete the logging an im
 Example Usage
 
 ```csharp
-var c = LoggingProxy<ICalculator>.Create(new Calculator(), new ConsoleLogger(), new LogEntryGenerator());
-c.Add(1, 2);
+                                            // the Calculator has to implement an interface
+var calc = LoggingProxy<ICalculator>.Create(new Calculator(),
+                                            // your implementation of AopLogging.ILogger
+                                            new ConsoleLogger(),
+                                            // your or the built-in implemenation
+                                            // of AopLogging.ILogEntryGenerator
+                                            new LogEntryGenerator());
+
+calc.Add(1, 2);
 ```
 
 If we decorate `T` with the `LoggingProxy` the logging will be totally automatic.
+
+Sample output of `ConsoleLogger`
+
+```
+07/19/2019 19:32:35|Information|Invoke|FullName: AopLoggingConsole.Calculator, Method: Add, Args: 1, 2
+07/19/2019 19:32:35|Information|Leave|FullName: AopLoggingConsole.Calculator, Method: Add, Args: 1, 2, Return type: System.Int32, Return value: 3
+```
