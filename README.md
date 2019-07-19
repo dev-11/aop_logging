@@ -3,7 +3,7 @@
 Simple aspect oriented logger
 
 
-The logging is implemented in `AopLogging.LogginProxy` class. To complete the logging, an implementation of the `AopLogging.ILogger` and `AopLogging.ILogEntryGenerator` have to be passed in next to the `T` what we want to decorate with the logging. The `T` class has to implement an interface, cannot be sealed, and cannot be abstract as these are the precondition of  `System.Reflection.DispatchProxyGenerator.GenerateProxyType(Type baseType, Type interfaceType)` method.
+The logging is implemented in `AopLogging.LogginProxy` class. To complete the logging, an implementation of the `AopLogging.ILogger` and `AopLogging.ILogEntryGenerator` have to be passed in next to the `T` what we want to decorate with the logging. The `T` class has to implement an interface, cannot be sealed, and cannot be abstract as these are the precondition of the `System.Reflection.DispatchProxyGenerator.GenerateProxyType(Type baseType, Type interfaceType)` method.
 
 ### Main Interfaces:
 
