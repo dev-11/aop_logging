@@ -12,3 +12,5 @@ Example Usage
 var c = LoggingProxy<ICalculator>.Create(new Calculator(), new ConsoleLogger(), new LogEntryGenerator());
 c.Add(1, 2);
 ```
+
+If we decorate `T` with the `LoggingProxy` the logging will be totally automatic.
