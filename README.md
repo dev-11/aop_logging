@@ -9,7 +9,7 @@ The logging is implemented in `AopLogging.LogginProxy` class. To complete the lo
 
 #### ILogger
 
-The `ILogger` interface has just a signle function: `void Log(LogEntry logEntry)`. How the logging exactly happens is up to the user.
+The `ILogger` interface has just a single function: `void Log(LogEntry logEntry)`. How the logging exactly happens is up to the user.
 
 #### ILogEntryGenerator
 
