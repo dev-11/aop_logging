@@ -3,7 +3,7 @@
 A Simple [aspect oriented](https://en.wikipedia.org/wiki/Aspect-oriented_programming "Aspect oriented programming") logger
 
 
-The logging is implemented in `AopLogging.LogginProxy` class. To complete the logging, an implementation of the `AopLogging.ILogger` and `AopLogging.ILogEntryGenerator` have to be passed in next to the `T` what we want to decorate with the logging. The `T` class has to implement an interface, cannot be sealed, and cannot be abstract as these are the precondition of the `System.Reflection.DispatchProxyGenerator.GenerateProxyType(Type baseType, Type interfaceType)` method.
+The logging is implemented in `AopLogging.LogginProxy` class. To complete the logging, an implementation of the `AopLogging.ILogger` and `AopLogging.ILogEntryBuilder` have to be passed in next to the `T` what we want to decorate with the logging. The `T` class has to implement an interface, cannot be sealed, and cannot be abstract as these are the precondition of the `System.Reflection.DispatchProxyGenerator.GenerateProxyType(Type baseType, Type interfaceType)` method.
 
 ### Main Interfaces:
 
@@ -13,14 +13,14 @@ The `ILogger` interface has just a signle function: `void Log(LogEntry logEntry)
 
 #### ILogEntryGenerator
 
-Right now the code logs 3 type of events: Invoke, Leave, and Exception. Every event generates a `LogEntry` which will be logged by the `ILogger`. There is a default implementation of the `ILogEntryGenerator` which can be easily replaced by a custom implementation of the `ILogEntryGenerator` interface.
+Right now the code logs 3 type of events: Invoke, Leave, and Exception. Every event generates a `LogEntry` which will be logged by the `ILogger`. There is a default implementation of the `ILogEntryBuilder` which can be easily replaced by a custom implementation of the `ILogEntryBuilder` interface.
 
 Example Usage
 
 ```csharp
 var calc = LoggingProxy<ICalculator>.Create(new Calculator(),
                                             new ConsoleLogger(),
-                                            new LogEntryGenerator());
+                                            new LogEntryBuilder());
 
 calc.Add(1, 2);
 cacl.Divide(12, 0);
