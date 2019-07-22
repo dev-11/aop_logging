@@ -7,7 +7,7 @@ namespace AopLogging
     {
         private T _decorated;
         private ILogger _logger;
-        private ILogEntryGenerator _logEntryGenerator;
+        private ILogEntryBuilder _logEntryBuilder;
 
         protected override object Invoke(MethodInfo targetMethod, object[] args)
         {
@@ -17,11 +17,11 @@ namespace AopLogging
             
             try
             {
-                _logger.Log(_logEntryGenerator.CreateInvocationLogEntry(className, methodName, args));
+                _logger.Log(_logEntryBuilder.BuildInvocationLogEntry(className, methodName, args));
 
                 var result = targetMethod.Invoke(_decorated, args);
 
-                _logger.Log(_logEntryGenerator.CreateLeavingLogEntry(className, methodName, args, returnType, result));
+                _logger.Log(_logEntryBuilder.BuildLeavingLogEntry(className, methodName, args, returnType, result));
                 
                 return result;
             }
@@ -29,21 +29,21 @@ namespace AopLogging
             {
                 var innerException = ex.InnerException ?? ex; 
                 
-                _logger.Log(_logEntryGenerator.CreateExceptionLogEntry(className, methodName, args, innerException));
+                _logger.Log(_logEntryBuilder.BuildExceptionLogEntry(className, methodName, args, innerException));
                 
                 throw innerException;
             }
         }
 
-        public static T Create(T decorated, ILogger logger, ILogEntryGenerator logEntryGenerator)
+        public static T Create(T decorated, ILogger logger, ILogEntryBuilder logEntryBuilder)
         {
             object proxy = Create<T, LoggingProxy<T>>();
-            ((LoggingProxy<T>)proxy).SetParameters(decorated, logger, logEntryGenerator);
+            ((LoggingProxy<T>)proxy).SetParameters(decorated, logger, logEntryBuilder);
 
             return (T)proxy;
         }
 
-        private void SetParameters(T decorated, ILogger logger, ILogEntryGenerator logEntryGenerator)
+        private void SetParameters(T decorated, ILogger logger, ILogEntryBuilder logEntryBuilder)
         {
             if (decorated == null)
             {
@@ -53,7 +53,7 @@ namespace AopLogging
             _decorated = decorated;
 
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            _logEntryGenerator = logEntryGenerator ?? throw new ArgumentNullException(nameof(logEntryGenerator));
+            _logEntryBuilder = logEntryBuilder ?? throw new ArgumentNullException(nameof(logEntryBuilder));
         }
     }
 }

@@ -4,9 +4,9 @@ using PayloadKeys = AopLogging.Constants.PayloadKeys;
 
 namespace AopLogging
 {
-    public class LogEntryGenerator : ILogEntryGenerator
+    public class LogEntryBuilder : ILogEntryBuilder
     {
-        public LogEntry CreateInvocationLogEntry(string className, string methodName, object[] args)
+        public LogEntry BuildInvocationLogEntry(string className, string methodName, object[] args)
         {
             return new LogEntry
             {
@@ -21,7 +21,7 @@ namespace AopLogging
             };
         }
 
-        public LogEntry CreateLeavingLogEntry(string className, string methodName, object[] args, Type returnType,
+        public LogEntry BuildLeavingLogEntry(string className, string methodName, object[] args, Type returnType,
             object returnValue)
         {
             return new LogEntry
@@ -39,7 +39,7 @@ namespace AopLogging
             };
         }
 
-        public LogEntry CreateExceptionLogEntry(string className, string methodName, object[] args, Exception innerException)
+        public LogEntry BuildExceptionLogEntry(string className, string methodName, object[] args, Exception innerException)
         {
             return new LogEntry
             {
