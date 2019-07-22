@@ -26,7 +26,7 @@ calc.Add(1, 2);
 calc.Divide(12, 0);
 ```
 
-If we decorate `T` with the `LoggingProxy` the logging will be totally automatic.
+If we decorate `T` with the `LoggingProxy` the logging will be completely automatic.
 
 Sample output of `ConsoleLogger`
 
