@@ -3,7 +3,7 @@
 A Simple [aspect oriented](https://en.wikipedia.org/wiki/Aspect-oriented_programming "Aspect oriented programming") logger
 
 
-The logging is implemented in `AopLogging.LogginProxy` class. To complete the logging, an implementation of the `AopLogging.ILogger` and `AopLogging.ILogEntryBuilder` have to be passed in next to the `T` what we want to decorate with the logging. The `T` class has to implement an interface, cannot be sealed, and cannot be abstract as these are the precondition of the `System.Reflection.DispatchProxyGenerator.GenerateProxyType(Type baseType, Type interfaceType)` method.
+The type `T`, what we want to decorate with logging, has to implement an interface, cannot be sealed, and cannot be abstract as these are the precondition of the `System.Reflection.DispatchProxyGenerator.GenerateProxyType(Type baseType, Type interfaceType)` method.
 
 ### Main Interfaces:
 
@@ -11,7 +11,7 @@ The logging is implemented in `AopLogging.LogginProxy` class. To complete the lo
 
 The `ILogger` interface has just a single function: `void Log(LogEntry logEntry)`. How the logging exactly happens is up to the user.
 
-#### ILogEntryGenerator
+#### ILogEntryBuilder
 
 Right now the code logs 3 type of events: Invoke, Leave, and Exception. Every event generates a `LogEntry` which will be logged by the `ILogger`. There is a default implementation of the `ILogEntryBuilder` which can be easily replaced by a custom implementation of the `ILogEntryBuilder` interface.
 
@@ -41,6 +41,6 @@ Unhandled Exception: System.DivideByZeroException: Attempted to divide by zero.
 --- End of stack trace from previous location where exception was thrown ---
    at System.Reflection.DispatchProxyGenerator.Invoke(Object[] args)
    at generatedProxy_1.Divide(Int32 , Int32 )
-   at AopLoggingConsole.Program.Main(String[] args) in /Users/otto/Source/GitHub/aop_logging/AopLoggingConsole/Program.cs:line 18
+   at AopLoggingConsole.Program.Main(String[] args) in /Users/Otto/Source/GitHub/aop_logging/AopLoggingConsole/Program.cs:line 18
 
 ```
