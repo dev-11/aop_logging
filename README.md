@@ -1,4 +1,4 @@
-# aop_logging
+# aop_logging [![Build Status](https://travis-ci.org/dev-11/aop_logging.svg?branch=master)](https://travis-ci.org/dev-11/aop_logging)
 
 A Simple [aspect oriented](https://en.wikipedia.org/wiki/Aspect-oriented_programming "Aspect oriented programming") logger
 
