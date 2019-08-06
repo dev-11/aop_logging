@@ -1,4 +1,6 @@
-# aop_logging [![Build Status](https://travis-ci.org/dev-11/aop_logging.svg?branch=master)](https://travis-ci.org/dev-11/aop_logging) ![GitHub](https://img.shields.io/github/license/dev-11/aop_logging.svg)
+# aop_logging
+
+[![Build Status](https://travis-ci.org/dev-11/aop_logging.svg?branch=master)](https://travis-ci.org/dev-11/aop_logging) ![GitHub](https://img.shields.io/github/license/dev-11/aop_logging.svg)
 
 A Simple [aspect oriented](https://en.wikipedia.org/wiki/Aspect-oriented_programming "Aspect oriented programming") logger
 
